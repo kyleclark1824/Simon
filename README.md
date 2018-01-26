@@ -1,32 +1,9 @@
 
 <p align="center">
-    <h3 align="center">Simple React Webpack Babel Starter Kit<br></h3>
+    <h3 align="center">Rubik's Cube!<br></h3>
 </p>
 
-[![CircleCI](https://circleci.com/gh/ReactJSResources/react-webpack-babel/tree/master.svg?style=svg)](https://circleci.com/gh/ReactJSResources/react-webpack-babel/tree/master)
-
-[![Dependency Status](https://img.shields.io/david/ReactJSResources/react-webpack-babel.svg)](https://david-dm.org/dylang/npm-check)
-
-Tired of complicated starters with 200MB of dependencies which are hard to understand and modify? This is for you!
-
-### What were using
-
-* React 16
-* Webpack 3
-* React Router 4
-* SASS
-* Babel Cli
-* Hot Module Reloading
-* Jest 21 
-* Enzyme 3 for testing
-
-### Features
-
-* Simple src/index.jsx and src/index.css (local module css).
-* Webpack configuration for development (with hot reloading) and production (with minification).
-* CSS module loading, so you can include your css by ```import styles from './path/to.css';```.
-* Both js(x) and css hot loaded during development.
-* [Webpack Dashboard Plugin](https://github.com/FormidableLabs/webpack-dashboard) on dev server.
+This project is a quick way to get up and running with webpack, babel, and React.
 
 ### To run
 
@@ -34,7 +11,7 @@ Tired of complicated starters with 200MB of dependencies which are hard to under
 * Fork and clone the project:
 
 ```
-git clone https://github.com/ReactJSResources/react-webpack-babel.git
+git clone https://github.com/kyleclark1824/rubiks.git
 ```
 
 * Then install the dependencies:
