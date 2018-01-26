@@ -139,8 +139,7 @@ const App = function(){
   return (
     <div style= {{textAlign:'center'}}>
       <div>
-        <h1>Hello</h1>
-        <p>This is a test</p>
+        <h1>Simon!</h1>
       </div>
       <table className="center">
         <tbody>
