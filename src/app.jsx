@@ -10,13 +10,13 @@ const controller = function(){
 var inst = new controller();
 
 controller.prototype.updateState = function(num){
-console.log("guessed: ", num, " seq: ", this.sequence);
+  console.log("guessed: ", num, " seq: ", this.sequence);
   if (parseInt(num) !== this.sequence[this.guessNum]){
-    alert("failed: " + this.sequence[this.guessNum]);
+    alert("failed: " + "  Correct response = " +  this.sequence[this.guessNum]);
+    toggleStart();
     this.resetState();
     return;
   }
-  console.log(this.sequence.length, this.guessNum);
   if (this.guessNum + 1 === this.sequence.length){
     this.guessNum = 0;
     this.incrementSequence()
@@ -38,16 +38,24 @@ controller.prototype.incrementSequence = function() {
   return Promise.resolve()
     .then(function(){
       that.sequence.push(getRandomArbitrary());
-      console.log("Incremented: ", that.sequence);
       return runSequence(that.sequence);
     })
 
 }
 
 controller.prototype.start = function(){
+  toggleStart();
   this.incrementSequence();
 };
 
+function toggleStart() {
+  var button = document.getElementById('startButton');
+  if (button.style.display == 'none'){
+    button.style.display = 'block';
+  } else {
+    button.style.display = 'none';
+  }
+}
 
 function getRandomArbitrary() {
     return Math.floor(Math.random() * (4 - 1 + 1)) + 1;
@@ -61,11 +69,47 @@ const runSequence =  (seq) => {
   .then(async () => {
     seq.forEach(async (val, i) => {
       await delay(i * 1000);
-      document.getElementById(val).style.display="none";
-      await delay(1000);
-      document.getElementById(val).style.display="block";
+      if (seq[i] === seq[i+1]){
+        switch (val){
+          case 1:
+            document.getElementById(val).classList.add('glowingYellowRepeat');
+            break;
+          case 2:
+            document.getElementById(val).classList.add('glowingBlueRepeat');
+            break;
+          case 3:
+            document.getElementById(val).classList.add('glowingGreenRepeat');
+            break;
+          case 4:
+            document.getElementById(val).classList.add('glowingRedRepeat');
+            break;
+        }
+        await delay(2000);
+      } else {
+        switch (val){
+          case 1:
+            document.getElementById(val).classList.add('glowingYellow');
+            break;
+          case 2:
+            document.getElementById(val).classList.add('glowingBlue');
+            break;
+          case 3:
+            document.getElementById(val).classList.add('glowingGreen');
+            break;
+          case 4:
+            document.getElementById(val).classList.add('glowingRed');
+            break;
+        }
+        await delay(1000);
+      }
+      var el = document.getElementById(val);
+      var prefix = "glowing";
+      var classes = el.className.split(" ").filter(function(c) {
+          return c.lastIndexOf(prefix, 0) !== 0;
+      });
+      el.className = classes.join(" ").trim();
     });
-    return await delay(seq.length + 1 * 1100);
+    return await delay(seq.length + 1 * 2000);
 
   })
   .then(() => {
@@ -73,6 +117,7 @@ const runSequence =  (seq) => {
   })
 
 }
+
 
 const showButtons = () => {
   var buttons = document.getElementsByClassName('buttonGroup');
@@ -127,7 +172,6 @@ export default App;
 const Yellow = function(){
     return (
         <button id="1" onClick={ () => {inst.updateState(1)}} className="yellow buttonGroup">
-            Yellow
         </button>
     );
 };
@@ -135,7 +179,6 @@ const Yellow = function(){
 const Blue = function() {
     return (
         <button id="2"onClick={ () => {inst.updateState(2)}} className="blue buttonGroup">
-            Blue
         </button>
     );
 
@@ -144,7 +187,6 @@ const Blue = function() {
 const Green = function(){
     return (
       <button id="3"onClick={ () => {inst.updateState(3)}} className="green buttonGroup">
-          Green
       </button>
     );
 };
@@ -152,7 +194,6 @@ const Green = function(){
 const Red = function(){
     return (
         <button id="4" onClick={ () => {inst.updateState(4)}} className="red buttonGroup">
-            Red
         </button>
     );
 
@@ -160,7 +201,7 @@ const Red = function(){
 
 const Start = function() {
   return (
-    <button onClick={ () => {inst.start()}}className="startButton">
+    <button id ="startButton" onClick={ () => {inst.start()}} className="startButton">
       Start
     </button>
   )
