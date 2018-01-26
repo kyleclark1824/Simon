@@ -1,6 +1,6 @@
 
 <p align="center">
-    <h3 align="center">Rubik's Cube!<br></h3>
+    <h3 align="center">Simon (or that 4 color memory game you played as a kid...)<br></h3>
 </p>
 
 This project is a quick way to get up and running with webpack, babel, and React.
